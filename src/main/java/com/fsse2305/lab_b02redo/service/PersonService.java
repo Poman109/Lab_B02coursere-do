@@ -1,9 +1,8 @@
 package com.fsse2305.lab_b02redo.service;
 
 import com.fsse2305.lab_b02redo.Exception.CreatePeopleException;
-import com.fsse2305.lab_b02redo.data.CreatePersonData;
-import com.fsse2305.lab_b02redo.data.CreatedPersonData;
-import com.fsse2305.lab_b02redo.data.GotAllPersonData;
+import com.fsse2305.lab_b02redo.Exception.NotFoundPeopleException;
+import com.fsse2305.lab_b02redo.data.*;
 import com.fsse2305.lab_b02redo.data.dto.CreatePersonRequestDto;
 import com.fsse2305.lab_b02redo.data.dto.GetAllPersonResponseDto;
 import com.fsse2305.lab_b02redo.data.entity.PersonEntity;
@@ -42,6 +41,22 @@ public class PersonService implements PersonServiceImpl {
 
         return gotAllPersonDataList;
 
+    }
+
+    public UpdatedPersonData updatePerson(UpdatePersonData updatePerson){
+
+        for(PersonEntity personEntity:personEntityList){
+            if(!personEntity.getHkid().equals(updatePerson.getHkid())){
+                continue;
+            }
+            personEntity.setFirstName(updatePerson.getFirstName());
+            personEntity.setLastName(updatePerson.getLastName());
+            personEntity.setHkid(updatePerson.getHkid());
+
+            UpdatedPersonData updatedPersonData = new UpdatedPersonData(personEntity);
+            return updatedPersonData;
+        }
+        throw new NotFoundPeopleException();
     }
 
 }

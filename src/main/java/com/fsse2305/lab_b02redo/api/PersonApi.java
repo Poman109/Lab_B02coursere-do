@@ -1,17 +1,10 @@
 package com.fsse2305.lab_b02redo.api;
 
-import com.fsse2305.lab_b02redo.data.CreatePersonData;
-import com.fsse2305.lab_b02redo.data.CreatedPersonData;
-import com.fsse2305.lab_b02redo.data.GotAllPersonData;
-import com.fsse2305.lab_b02redo.data.dto.CreatePersonRequestDto;
-import com.fsse2305.lab_b02redo.data.dto.CreatePersonResponseDto;
-import com.fsse2305.lab_b02redo.data.dto.GetAllPersonResponseDto;
+import com.fsse2305.lab_b02redo.data.*;
+import com.fsse2305.lab_b02redo.data.dto.*;
 import com.fsse2305.lab_b02redo.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +42,14 @@ public class PersonApi {
         return getAllPersonResponseArray;
     }
 
+    @PutMapping("/person")
+    public UpdatePersonDataResponseDto updatePerson(@RequestBody UpdatePersonDataRequestDto updatePersonDataRequestDto){
+        UpdatePersonData updatePersonData = new UpdatePersonData(updatePersonDataRequestDto);
+        UpdatedPersonData updatedPersonData = personservice.updatePerson(updatePersonData);
+
+        UpdatePersonDataResponseDto updatePersonDataResponseDto = new UpdatePersonDataResponseDto(updatedPersonData);
+        return updatePersonDataResponseDto;
+    }
 
 
 }
