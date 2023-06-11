@@ -25,13 +25,15 @@ public class CourseApi {
         CreateCourseData createCourseData = new CreateCourseData(createCourseRequestDto);
         CourseDetailData courseDetailData = courseService.createCourse(createCourseData);
 
-        CourseDetailResponseDto courseDetailResponseDto = new CourseDetailResponseDto();
-        courseDetailResponseDto.setCourseId(courseDetailData.getCourseId());
-        courseDetailResponseDto.setName(courseDetailData.getName());
-        courseDetailResponseDto.setPrice(courseDetailData.getPrice());
-        PersonDetailResponseDto teacher = new PersonDetailResponseDto(courseDetailData.getTeacher());
-        courseDetailResponseDto.setTeacher(teacher);
 
+//        Lv1
+//        courseDetailResponseDto.setCourseId(courseDetailData.getCourseId());
+//        courseDetailResponseDto.setName(courseDetailData.getName());
+//        courseDetailResponseDto.setPrice(courseDetailData.getPrice());
+//        PersonDetailResponseDto teacher = new PersonDetailResponseDto(courseDetailData.getTeacher());
+//        courseDetailResponseDto.setTeacher(teacher);
+
+        CourseDetailResponseDto courseDetailResponseDto = new CourseDetailResponseDto(courseDetailData);
         return courseDetailResponseDto;
     }
 

@@ -33,15 +33,17 @@ public class CourseService implements CourseServiceImpl {
         courseEntityArray.add(courseEntity);
 
 
-        CourseDetailData courseDetailData = new CourseDetailData();
-        courseDetailData.setCourseId(courseEntity.getCourseId());
-        courseDetailData.setName(courseEntity.getName());
-        courseDetailData.setPrice(courseEntity.getPrice());
-        PersonDetailDate teacher = new PersonDetailDate(courseEntity.getTeacher());
-        courseDetailData.setTeacher(teacher);
+        CourseDetailData courseDetailData = new CourseDetailData(courseEntity);
+
+//        Lv1
+//        courseDetailData.setCourseId(courseEntity.getCourseId());
+//        courseDetailData.setName(courseEntity.getName());
+//        courseDetailData.setPrice(courseEntity.getPrice());
+//        PersonDetailDate teacher = new PersonDetailDate(courseEntity.getTeacher());
+//        courseDetailData.setTeacher(teacher);
+
+
         return courseDetailData;
-
-
     }
 
 

@@ -1,7 +1,10 @@
 package com.fsse2305.lab_b02redo.data;
 
 import com.fsse2305.lab_b02redo.data.dto.CourseDetailResponseDto;
+import com.fsse2305.lab_b02redo.data.entity.CourseEntity;
+import com.fsse2305.lab_b02redo.data.entity.PersonEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDetailData {
@@ -10,6 +13,23 @@ public class CourseDetailData {
     private Double price;
     private PersonDetailDate teacher;
     private List<PersonDetailDate> students;
+
+    public CourseDetailData(CourseEntity courseEntity){
+        this.courseId = courseEntity.getCourseId();
+        this.name = courseEntity.getName();
+        this.price = courseEntity.getPrice();
+        PersonDetailDate personDetailDate = new PersonDetailDate(courseEntity.getTeacher());
+        this.teacher = personDetailDate;
+        List<PersonDetailDate>  personDetailDateList = new ArrayList<>();
+        if(!(courseEntity.getStudents()==null)) {
+            for (PersonEntity personEntity : courseEntity.getStudents()) {
+                PersonDetailDate student = new PersonDetailDate(personEntity);
+                personDetailDateList.add(student);
+            }
+            this.students = personDetailDateList;
+        }
+
+    }
 
     public String getCourseId() {
         return courseId;

@@ -11,6 +11,8 @@ public class CreateCourseRequestDto {
     @JsonProperty("teacher_hkid")
     private String teacherHkid;
 
+
+
     public String getCourseId() {
         return CourseId;
     }

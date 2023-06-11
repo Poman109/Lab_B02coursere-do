@@ -1,13 +1,44 @@
 package com.fsse2305.lab_b02redo.data.dto;
 
+import com.fasterxml.jackson.annotation.JsonKey;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fsse2305.lab_b02redo.data.CourseDetailData;
+import com.fsse2305.lab_b02redo.data.PersonDetailDate;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDetailResponseDto {
-    private String courseId;
-    private String name;
+    @JsonProperty("price")
     private Double price;
+    @JsonProperty("teacher")
     private PersonDetailResponseDto teacher;
+    @JsonProperty("students")
     private List<PersonDetailResponseDto> students;
+    @JsonProperty("course_id")
+    private String courseId;
+    @JsonProperty("course_name")
+    private String name;
+
+
+    public CourseDetailResponseDto(CourseDetailData courseDetailData){
+        this.courseId = courseDetailData.getCourseId();
+        this.name = courseDetailData.getName();
+        this.price = courseDetailData.getPrice();
+        PersonDetailResponseDto teacher = new PersonDetailResponseDto(courseDetailData.getTeacher());
+        this.teacher = teacher;
+        List<PersonDetailResponseDto> studentsArray = new ArrayList<>();
+        if(!(courseDetailData.getStudents()==null)){
+            for (PersonDetailDate personDetailDate: courseDetailData.getStudents()){
+                PersonDetailResponseDto student = new PersonDetailResponseDto(personDetailDate);
+                studentsArray.add(student);
+            }
+            this.students = studentsArray;
+        }
+
+
+
+    }
 
     public String getCourseId() {
         return courseId;
