@@ -61,6 +61,7 @@ public class PersonService implements PersonServiceImpl {
         throw new NotFoundPeopleException();
     }
 
+    @Override
     public DeletedPersonData deletedPersonData(String hkid){
         for(PersonEntity personEntity: personEntityList){
             if(!personEntity.getHkid().equals(hkid)){
@@ -71,6 +72,16 @@ public class PersonService implements PersonServiceImpl {
             return deletedPersonData;
         }
 
+        throw new NotFoundPeopleException();
+    }
+
+    public PersonEntity getCourseTeacher(String hkid){
+        for(PersonEntity personEntity : personEntityList){
+            if(!personEntity.getHkid().equals(hkid)){
+                continue;
+            }
+            return personEntity;
+        }
         throw new NotFoundPeopleException();
     }
 

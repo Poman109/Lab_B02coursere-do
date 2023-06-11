@@ -8,7 +8,7 @@ public class CreateCourseRequestDto {
     @JsonProperty("course_name")
     private String name;
     private Double price;
-    @JsonProperty("teacher hkid")
+    @JsonProperty("teacher_hkid")
     private String teacherHkid;
 
     public String getCourseId() {

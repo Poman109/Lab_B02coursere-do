@@ -11,4 +11,6 @@ public interface PersonServiceImpl {
     List<GotAllPersonData> gotAllPerson();
 
     UpdatedPersonData updatePerson(UpdatePersonData updatePerson);
+
+    DeletedPersonData deletedPersonData(String hkid);
 }
