@@ -1,5 +1,8 @@
 package com.fsse2305.lab_b02redo.data.entity;
 
+import com.fsse2305.lab_b02redo.data.UpdateCourseData;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseEntity {
@@ -7,7 +10,7 @@ public class CourseEntity {
     private String name;
     private Double price;
     private PersonEntity teacher;
-    private List<PersonEntity> students;
+    private List<PersonEntity> students = new ArrayList<>();
 
     public String getCourseId() {
         return courseId;

@@ -3,8 +3,7 @@ package com.fsse2305.lab_b02redo.service;
 import com.fsse2305.lab_b02redo.Exception.CreatePeopleException;
 import com.fsse2305.lab_b02redo.Exception.NotFoundPeopleException;
 import com.fsse2305.lab_b02redo.data.*;
-import com.fsse2305.lab_b02redo.data.dto.CreatePersonRequestDto;
-import com.fsse2305.lab_b02redo.data.dto.GetAllPersonResponseDto;
+import com.fsse2305.lab_b02redo.data.entity.CourseEntity;
 import com.fsse2305.lab_b02redo.data.entity.PersonEntity;
 import com.fsse2305.lab_b02redo.service.impl.PersonServiceImpl;
 import org.springframework.stereotype.Service;
@@ -75,7 +74,7 @@ public class PersonService implements PersonServiceImpl {
         throw new NotFoundPeopleException();
     }
 
-    public PersonEntity getCourseTeacher(String hkid){
+    public PersonEntity getPerson(String hkid){
         for(PersonEntity personEntity : personEntityList){
             if(!personEntity.getHkid().equals(hkid)){
                 continue;
@@ -83,6 +82,21 @@ public class PersonService implements PersonServiceImpl {
             return personEntity;
         }
         throw new NotFoundPeopleException();
+    }
+
+    public Boolean checkStudent(CourseEntity courseEntity, String hkid){
+        boolean studentValid = false;
+        if(!(courseEntity.getStudents()==null)) {
+
+            for (PersonEntity personEntity : courseEntity.getStudents()) {
+                if (personEntity.getHkid().equals(hkid)) {
+                    studentValid = false;
+                    return false;
+                }
+            }
+        }
+        return true;
+
     }
 
 }
