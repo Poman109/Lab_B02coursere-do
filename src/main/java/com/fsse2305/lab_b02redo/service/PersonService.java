@@ -32,6 +32,7 @@ public class PersonService implements PersonServiceImpl {
 
     }
 
+    @Override
     public List<GotAllPersonData> gotAllPerson(){
         List<GotAllPersonData> gotAllPersonDataList = new ArrayList<>();
         for(PersonEntity personEntity: personEntityList){
@@ -43,6 +44,7 @@ public class PersonService implements PersonServiceImpl {
 
     }
 
+    @Override
     public UpdatedPersonData updatePerson(UpdatePersonData updatePerson){
 
         for(PersonEntity personEntity:personEntityList){
@@ -56,6 +58,19 @@ public class PersonService implements PersonServiceImpl {
             UpdatedPersonData updatedPersonData = new UpdatedPersonData(personEntity);
             return updatedPersonData;
         }
+        throw new NotFoundPeopleException();
+    }
+
+    public DeletedPersonData deletedPersonData(String hkid){
+        for(PersonEntity personEntity: personEntityList){
+            if(!personEntity.getHkid().equals(hkid)){
+                continue;
+            }
+            personEntityList.remove(personEntity);
+            DeletedPersonData deletedPersonData = new DeletedPersonData(personEntity);
+            return deletedPersonData;
+        }
+
         throw new NotFoundPeopleException();
     }
 

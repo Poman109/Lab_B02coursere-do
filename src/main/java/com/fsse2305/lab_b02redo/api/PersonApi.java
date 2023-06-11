@@ -51,5 +51,13 @@ public class PersonApi {
         return updatePersonDataResponseDto;
     }
 
+    @DeleteMapping ("/person")
+    public DeletePersonDataResponseDto deletePerson(@RequestParam(value = "hkid_number") String hkid){
+        DeletedPersonData deletedPersonData = personservice.deletedPersonData(hkid);
+        DeletePersonDataResponseDto deletePersonDataResponseDto = new DeletePersonDataResponseDto(deletedPersonData);
+        return deletePersonDataResponseDto;
+    }
+
+
 
 }

@@ -1,24 +1,17 @@
-package com.fsse2305.lab_b02redo.data.dto;
+package com.fsse2305.lab_b02redo.data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fsse2305.lab_b02redo.data.DeletedPersonData;
+import com.fsse2305.lab_b02redo.data.entity.PersonEntity;
 
-public class DeletePersonDataResponseDto {
-    @JsonProperty("first_name")
+public class DeletedPersonData {
     private String firstName;
-    @JsonProperty("last_name")
     private String lastName;
-    @JsonProperty("hkid_number")
     private String hkid;
 
-    public DeletePersonDataResponseDto(DeletedPersonData deletedPersonData){
-        this.firstName = deletedPersonData.getFirstName();
-        this.lastName = deletedPersonData.getLastName();
-        this.hkid = deletedPersonData.getHkid();
+    public DeletedPersonData(PersonEntity personEntity){
+        this.firstName = personEntity.getFirstName();
+        this.lastName = personEntity.getLastName();
+        this.hkid = personEntity.getHkid();
     }
-
-
-
     public String getFirstName() {
         return firstName;
     }
