@@ -74,6 +74,21 @@ public class PersonService implements PersonServiceImpl {
         throw new NotFoundPeopleException();
     }
 
+    public List<GetPersonByLastNameData> getPersonByLastName(String lastName){
+       List<GetPersonByLastNameData> getPersonByLastNameDataArray = new ArrayList<>();
+      for(PersonEntity personEntity:personEntityList){
+          if(!(personEntity.getLastName().equals(lastName))){
+              continue;
+          }
+          GetPersonByLastNameData getPersonByLastNameData = new GetPersonByLastNameData(personEntity);
+          getPersonByLastNameDataArray.add(getPersonByLastNameData);
+
+      }
+      return getPersonByLastNameDataArray;
+    }
+
+
+    @Override
     public PersonEntity getPerson(String hkid){
         for(PersonEntity personEntity : personEntityList){
             if(!personEntity.getHkid().equals(hkid)){
@@ -84,6 +99,7 @@ public class PersonService implements PersonServiceImpl {
         throw new NotFoundPeopleException();
     }
 
+    @Override
     public Boolean checkStudent(CourseEntity courseEntity, String hkid){
         boolean studentValid = false;
         if(!(courseEntity.getStudents()==null)) {

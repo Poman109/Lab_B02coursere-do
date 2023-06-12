@@ -2,6 +2,7 @@ package com.fsse2305.lab_b02redo.service;
 
 import com.fsse2305.lab_b02redo.Exception.CannotUpdateClassException;
 import com.fsse2305.lab_b02redo.Exception.ErrorDeleteCourseException;
+import com.fsse2305.lab_b02redo.Exception.ErrorDeleteStudent;
 import com.fsse2305.lab_b02redo.Exception.ErrorUpdateStudent;
 import com.fsse2305.lab_b02redo.data.CourseDetailData;
 import com.fsse2305.lab_b02redo.data.CreateCourseData;
@@ -28,7 +29,7 @@ public class CourseService implements CourseServiceImpl {
         this.personService = personService;
     }
 
-
+    @Override
     public CourseDetailData createCourse(CreateCourseData createCourseData){
         CourseEntity courseEntity = new CourseEntity();
         courseEntity.setCourseId(createCourseData.getCourseId());
@@ -51,6 +52,8 @@ public class CourseService implements CourseServiceImpl {
         return courseDetailData;
     }
 
+
+    @Override
     public List<CourseDetailData> getAllCourseDetails(){
         List<CourseDetailData> courseArray = new ArrayList<>();
         for(CourseEntity courseEntity: courseEntityArray){
@@ -61,6 +64,7 @@ public class CourseService implements CourseServiceImpl {
 
     }
 
+    @Override
     public CourseDetailData updateCourseData (UpdateCourseData updateCourseData){
         for(CourseEntity courseEntity: courseEntityArray){
             if(!courseEntity.getCourseId().equals(updateCourseData.getCourseId())){
@@ -76,6 +80,7 @@ public class CourseService implements CourseServiceImpl {
         throw new CannotUpdateClassException();
     }
 
+    @Override
     public CourseDetailData deleteCourse(String courseId){
         for(CourseEntity courseEntity: courseEntityArray){
             if (!courseEntity.getCourseId().equals(courseId)){
@@ -90,23 +95,41 @@ public class CourseService implements CourseServiceImpl {
 
     }
 
+    @Override
     public CourseDetailData addStudent(String courseId,String hkid){
         for(CourseEntity courseEntity:courseEntityArray){
             if(!courseEntity.getCourseId().equals(courseId)){
                 continue;
             }
 
-
             if(personService.checkStudent(courseEntity,hkid)){
 
                     courseEntity.getStudents().add(personService.getPerson(hkid));
                     CourseDetailData courseDetailData = new CourseDetailData(courseEntity);
                     return courseDetailData;
-
             }
-
         }
         throw new ErrorUpdateStudent();
+    }
+
+    @Override
+    public CourseDetailData deleteStudent(String courseId, String hkid){
+        for(CourseEntity courseEntity: courseEntityArray){
+            if (!(courseEntity.getCourseId().equals(courseId))){
+                continue;
+            }
+
+            for(PersonEntity personEntity: courseEntity.getStudents()){
+                if(!personEntity.getHkid().equals(hkid)){
+                    continue;
+                }
+                courseEntity.getStudents().remove(personEntity);
+                CourseDetailData courseDetailData = new CourseDetailData(courseEntity);
+                return courseDetailData;
+            }
+        }
+
+        throw new ErrorDeleteStudent();
     }
 
 

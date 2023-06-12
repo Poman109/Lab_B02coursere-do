@@ -58,6 +58,17 @@ public class PersonApi {
         return deletePersonDataResponseDto;
     }
 
+    @GetMapping("/person/{last_name}")
+    public List<GetPersonByLastNameResponseDto> getPersonByLastName(@PathVariable ("last_name") String lastName){
+        List<GetPersonByLastNameData> getPersonByLastNameDataList = personservice.getPersonByLastName(lastName);
+        List<GetPersonByLastNameResponseDto> getPersonByLastNameResponseDtoList = new ArrayList<>();
+        for(GetPersonByLastNameData getPersonByLastNameData : getPersonByLastNameDataList){
+            GetPersonByLastNameResponseDto getPersonByLastNameResponseDto = new GetPersonByLastNameResponseDto(getPersonByLastNameData);
+            getPersonByLastNameResponseDtoList.add(getPersonByLastNameResponseDto);
+        }
+        return getPersonByLastNameResponseDtoList;
+    }
+
 
 
 }

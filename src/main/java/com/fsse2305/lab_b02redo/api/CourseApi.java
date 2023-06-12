@@ -80,6 +80,12 @@ public class CourseApi {
     }
 
 
+    @PatchMapping ("/course/{course_id}/remove-student/{person_hkid}")
+    public CourseDetailResponseDto deleteStudent(@PathVariable("course_id") String courseId,@PathVariable ("person_hkid")String hkid){
+        CourseDetailResponseDto courseDetailResponseDto= new CourseDetailResponseDto(courseService.deleteStudent(courseId,hkid));
+        return courseDetailResponseDto;
+
+    }
 
 
 
